@@ -1,37 +1,25 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en-us">
   <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="description" content="ESPN Fantasy Football Reporter for GroupMe : A bot to report matchups, projections, and scores to GroupMe chats">
-
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
-
-    <title>ESPN Fantasy Football Reporter for GroupMe</title>
+    <meta charset="UTF-8">
+    <title>ESPN Fantasy Football Reporter for GroupMe by IanDTrapp</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
   </head>
-
   <body>
+    <section class="page-header">
+      <h1 class="project-name">ESPN Fantasy Football Reporter for GroupMe</h1>
+      <h2 class="project-tagline">A bot to report matchups, projections, and scores to GroupMe chats</h2>
+      <a href="https://github.com/IanDTrapp/GroupMe-Fantasy-Football-Bot" class="btn">View on GitHub</a>
+      <a href="https://github.com/IanDTrapp/GroupMe-Fantasy-Football-Bot/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/IanDTrapp/GroupMe-Fantasy-Football-Bot/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
 
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/IanDTrapp/GroupMe-Fantasy-Football-Bot">View on GitHub</a>
-
-          <h1 id="project_title">ESPN Fantasy Football Reporter for GroupMe</h1>
-          <h2 id="project_tagline">A bot to report matchups, projections, and scores to GroupMe chats</h2>
-
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/IanDTrapp/GroupMe-Fantasy-Football-Bot/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/IanDTrapp/GroupMe-Fantasy-Football-Bot/tarball/master">Download this project as a tar.gz file</a>
-            </section>
-        </header>
-    </div>
-
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        <h3>
+    <section class="main-content">
+      <h3>
 <a id="what-do-i-need-to-set-this-up" class="anchor" href="#what-do-i-need-to-set-this-up" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>What do I need to set this up?</h3>
 
 <p>Simply a computer, GroupMe account, and a Google account. The way this works is a Google Spreadsheet scrapes information from ESPN's public league homepage and a Google Script takes that information and forwards it to GroupMe. Unfortunately since I don't know how your league is set up, it may require some slight script edits on your part but I'm happy to answer any questions to help get it working for you. </p>
@@ -39,41 +27,49 @@
 <h3>
 <a id="step-1---set-up-your-spreadsheet" class="anchor" href="#step-1---set-up-your-spreadsheet" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Step 1 - Set up your spreadsheet</h3>
 
-<p>The formula <code>=IMPORTHTML("YOUR_PUBLIC_LEAGUE_HOMEPAGE_URL_HERE","table",3)</code>, for example, will take the information from the third table on your league homepage and put it in to the spreadsheet. The scoreboards are present on tables 3, 5, 7, 9, and 11 for a 10 man league with 5 games at a time. So in the following cells, paste the following formulas:</p>
+<p>First, navigate to your league's scoreboard page. Ensure your league is a public league, and that you can hit the page even when you aren't logged in (try accessing the page in an incognito tab). Copy that URL for the scoreboard page, and go to your spreadsheet. To give you an idea about what the formula's I used are doing, the formula <code>=IMPORTHTML("YOUR_PUBLIC_LEAGUE_SCOREBOARD_URL_HERE","table",3)</code> will take the information from the third table on your league homepage and put it in to the spreadsheet. The scoreboards are present on tables 3, 5, 7, 9, and 11 for a 10 man league with 5 games at a time. So in the following cells, paste the following formulas:</p>
 
 <ul>
-<li>A1: <code>=IMPORTHTML("YOUR_PUBLIC_LEAGUE_HOMEPAGE_URL_HERE","table",3)</code>
+<li>A1: <code>=IMPORTHTML("YOUR_PUBLIC_LEAGUE_SCOREBOARD_URL_HERE","table",3)</code>
 </li>
-<li>A4: <code>=IMPORTHTML("YOUR_PUBLIC_LEAGUE_HOMEPAGE_URL_HERE","table",5)</code> </li>
-<li>A7: <code>=IMPORTHTML("YOUR_PUBLIC_LEAGUE_HOMEPAGE_URL_HERE","table",7)</code>
+<li>A4: <code>=IMPORTHTML("YOUR_PUBLIC_LEAGUE_SCOREBOARD_URL_HERE","table",5)</code> </li>
+<li>A7: <code>=IMPORTHTML("YOUR_PUBLIC_LEAGUE_SCOREBOARD_URL_HERE","table",7)</code>
 </li>
-<li>A10: <code>=IMPORTHTML("YOUR_PUBLIC_LEAGUE_HOMEPAGE_URL_HERE","table",9)</code>
+<li>A10: <code>=IMPORTHTML("YOUR_PUBLIC_LEAGUE_SCOREBOARD_URL_HERE","table",9)</code>
 </li>
-<li>A13: <code>=IMPORTHTML("YOUR_PUBLIC_LEAGUE_HOMEPAGE_URL_HERE","table",11)</code>
+<li>A13: <code>=IMPORTHTML("YOUR_PUBLIC_LEAGUE_SCOREBOARD_URL_HERE","table",11)</code>
 </li>
 </ul>
 
 <p>And continue on that pattern for as many games as you have. If you have an 8 man league, you wont need that last one.</p>
 
 <p>After that, you'll want to set up your detail statistics information next to each game box. The formula
-<code>=IMPORTHTML("YOUR_PUBLIC_LEAGUE_HOMEPAGE_URL_HERE","table",4)</code> takes the first game's detail information box containing yet to play, in play, etc.</p>
+<code>=IMPORTHTML("YOUR_PUBLIC_LEAGUE_SCOREBOARD_URL_HERE","table",4)</code> takes the first game's detail information box containing yet to play, in play, etc.</p>
 
 <p>In the following cells, put the following formulas:</p>
 
 <ul>
-<li>C1: <code>=IMPORTHTML("YOUR_PUBLIC_LEAGUE_HOMEPAGE_URL_HERE","table",4)</code>
+<li>C1: <code>=IMPORTHTML("YOUR_PUBLIC_LEAGUE_SCOREBOARD_URL_HERE","table",4)</code>
 </li>
-<li>C4: <code>=IMPORTHTML("YOUR_PUBLIC_LEAGUE_HOMEPAGE_URL_HERE","table",6)</code>
+<li>C4: <code>=IMPORTHTML("YOUR_PUBLIC_LEAGUE_SCOREBOARD_URL_HERE","table",6)</code>
 </li>
-<li>C7: <code>=IMPORTHTML("YOUR_PUBLIC_LEAGUE_HOMEPAGE_URL_HERE","table",8)</code>
+<li>C7: <code>=IMPORTHTML("YOUR_PUBLIC_LEAGUE_SCOREBOARD_URL_HERE","table",8)</code>
 </li>
-<li>C10: <code>=IMPORTHTML("YOUR_PUBLIC_LEAGUE_HOMEPAGE_URL_HERE","table",10)</code>
+<li>C10: <code>=IMPORTHTML("YOUR_PUBLIC_LEAGUE_SCOREBOARD_URL_HERE","table",10)</code>
 </li>
-<li>C13: <code>=IMPORTHTML("YOUR_PUBLIC_LEAGUE_HOMEPAGE_URL_HERE","table",12)</code>
+<li>C13: <code>=IMPORTHTML("YOUR_PUBLIC_LEAGUE_SCOREBOARD_URL_HERE","table",12)</code>
 </li>
 </ul>
 
-<p>This is all the information you'll need for getting scores and matchups. </p>
+<p>For transactions, you'll need to get the URL of your league's public transactions page. From your public league home page, click 'transactions' at the bottom. Copy that URL, and paste it as follows:</p>
+
+<ul>
+<li>A17: <code>=IMPORTHTML("YOUR_PUBLIC_TRANSACTION_PAGE", "table", 2)</code> </li>
+</ul>
+
+<p>By default, the bot will post all transactions occurring within the last 24 hours (you can use triggers explained below to make the bot post transactions every 24 hours automatically), but will only post 10 to avoid hitting GroupMe's character limit. Many large trades and transactions may still go over this limit. To get alerted if a trigger fails, see how to get trigger failure emails in the triggers section below. </p>
+
+<p><strong>IMPORTANT</strong> - In your spreadsheet, go to file -&gt; spreadsheet settings -&gt; recalculation and set it to 'on change and every minute' in order to keep your spreadsheet updated as frequently as possible.</p>
 
 <h3>
 <a id="step-2---create-a-copy-of-the-code-for-yourself" class="anchor" href="#step-2---create-a-copy-of-the-code-for-yourself" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Step 2 - Create a copy of the code for yourself</h3>
@@ -87,7 +83,7 @@
 
 <p>Choose your fantasy football chat name, a give the bot a name and (optional) an avatar. We will come back and add the Callback URL.</p>
 
-<p>Once you hit create, copy the bot ID from the next screen, and paste it in to the quotes in place of "YOUR_BOT_ID_HERE" (parseInput.gs, Line 1). While you're there, change the variables for NUMBER_OF_MATCHUPS_PER_WEEK and NUMBER_OF_PLAYERS_IN_LEAGUE to the correct values for your league. You should also add your spreadsheet url within those quotes for SPREADSHEET_URL, by clicking "share" on your spreadsheet, selecting "allow users with link to edit", and copying that link.</p>
+<p>Once you hit create, copy the bot ID from the next screen, and paste it in to the Google Script where it says "YOUR_BOT_ID_HERE" (parseInput.gs, Line 1). While you're there, change the variables for NUMBER_OF_MATCHUPS_PER_WEEK and NUMBER_OF_PLAYERS_IN_LEAGUE to the correct values for your league. </p>
 
 <p>After that, click "Publish", and set your settings the same way these are set.</p>
 
@@ -105,14 +101,16 @@
 <h3>
 <a id="triggers" class="anchor" href="#triggers" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Triggers</h3>
 
-<p>If you go to "Resources" and then to "Current project triggers", you can set up certain functions to run at certain times. For example, my league has <code>getMatchups()</code> run every Thursday at 5pm before Thursday Night Football starts. I also have <code>getScores()</code> run Thursday at midnight, Sunday at 4, 8, midnight, Monday at midnight, and Tuesday at 10am.</p>
+<p>If you go to "Resources" and then to "Current project triggers", you can set up certain functions to run at certain times. For example, my league has <code>getMatchups()</code> run every Thursday at 5pm before Monday Night Football starts. I also have <code>getScores()</code> run Thursday at midnight, Sunday at 4, 8, midnight, Monday at midnight, and Tuesday at 10am.</p>
 
 <p>You can set these to run as frequently or as infrequently as you would like.</p>
+
+<p>To get an email if a trigger fails, click on the little 'notification' button under each trigger, and set an email and time for it to send the failure notice to.</p>
 
 <h3>
 <a id="subscribe-for-new-feature-alerts" class="anchor" href="#subscribe-for-new-feature-alerts" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Subscribe for new feature alerts</h3>
 
-<p>At the moment, I am testing and adding more features. I plan to add them in a way that is modular, you can pick which you want or do not want and adding them should not require a lot of work on your part. If you want to be alerted when new features are released, feel free to add your email to my mailing list here:</p>
+<p>At the moment, I am testing and adding more features. If you want to be alerted when new features are released, feel free to add your email to my mailing list here:</p>
 
 <p><a href="https://goo.gl/forms/RacS74FOF3l48Kn23">Add your email</a></p>
 
@@ -122,27 +120,27 @@
 <p>In the works (will be implemented after my personal league's draft Monday):</p>
 
 <ul>
-<li>Transaction reports</li>
-<li>Waiver wire claims</li>
-<li>Inactive player reports</li>
+<li>Inactive player reports (when byes start)</li>
 </ul>
+
+<h3>
+<a id="disclaimer" class="anchor" href="#disclaimer" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Disclaimer</h3>
+
+<p>This solution is pretty hacky, and is subject to randomly not working. Developing it has been weird because things that should work shouldn't, and things that shouldn't work work perfectly fine. HTML scraping is a very unreliable way to get information, and any slight change to ESPN's site will break this bot. I'll do my best to perform any triage, but consider this a warning. It works very well at the moment, and I hope it stays that way. I hope you enjoy it!</p>
 
 <h3>
 <a id="about" class="anchor" href="#about" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>About</h3>
 
-<p>Written and maintained by Ian Trapp - <a href="mailto:floppy454@gmail.com">floppy454@gmail.com</a> for questions</p>
-      </section>
-    </div>
+<p>Written and maintained by Ian Trapp - <a href="mailto:iandtrapp@gmail.com">iandtrapp@gmail.com</a> for questions</p>
 
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">ESPN Fantasy Football Reporter for GroupMe maintained by <a href="https://github.com/IanDTrapp">IanDTrapp</a></p>
-        <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/IanDTrapp/GroupMe-Fantasy-Football-Bot">ESPN Fantasy Football Reporter for GroupMe</a> is maintained by <a href="https://github.com/IanDTrapp">IanDTrapp</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
       </footer>
-    </div>
 
-    
+    </section>
 
+  
   </body>
 </html>
