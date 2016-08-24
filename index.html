@@ -95,6 +95,16 @@
 
 <p>Once you have that URL, go back to your bot and paste that URL in as the callback URL. Once you hit okay, your bot should be good to go. You can test it by going to getScores.gs and hitting the "run button" (making sure it says to run getScores), and ensuring the info is correct. </p>
 
+<p><strong>UPDATE</strong></p>
+
+<p>Some notes about some stupid mistakes I've made -</p>
+
+<p>If you have a league of more than 10 players, you're going to have to move the transaction formula down some and I totally forgot about that. If this is the case for you, in order to get transactions working, change the 19 in row 19 of reportTransactions() 
+<code>var currentTransactionInfo = range.getCell(19 + i, 3).getValue();</code>
+to the number of the row that contains your first actual transaction (As in a date, type, player, etc. row, not a header). </p>
+
+<p>Another thing I forgot to mention - This will throw an error if you have no real transactions yet. Once you get transactions, it should work!</p>
+
 <h3>
 <a id="calling-the-bot" class="anchor" href="#calling-the-bot" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Calling the bot</h3>
 
